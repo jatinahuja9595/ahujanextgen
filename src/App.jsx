@@ -210,7 +210,7 @@ function DemoModal({ open, onClose }) {
                 <option value="" disabled>Which program interests you?</option>
                 {PROGRAM_CATS.map((p) => (
                   p.courses.length > 0
-                    ? <optgroup key={p.t} label={p.t}>{p.courses.map((c) => <option key={c} value={c}>{c}</option>)}</optgroup>
+                    ? <optgroup key={p.t} label={p.t}>{p.courses.map((c) => <option key={c.name} value={c.name}>{c.name} ({c.duration})</option>)}</optgroup>
                     : <option key={p.t} value={p.t}>{p.t}</option>
                 ))}
               </select>
@@ -464,7 +464,7 @@ function Hero({ setPage }) {
                         <option value="">Course of Interest</option>
                         {PROGRAM_CATS.map((p) => (
                           p.courses.length > 0
-                            ? <optgroup key={p.t} label={p.t}>{p.courses.map((c) => <option key={c} value={c}>{c}</option>)}</optgroup>
+                            ? <optgroup key={p.t} label={p.t}>{p.courses.map((c) => <option key={c.name} value={c.name}>{c.name} ({c.duration})</option>)}</optgroup>
                             : <option key={p.t} value={p.t}>{p.t}</option>
                         ))}
                       </select>
@@ -675,42 +675,108 @@ function WhoCanJoin() {
 /* ---------------- PROGRAM CATEGORIES (shared data) ---------------- */
 const PROGRAM_CATS = [
   {
-    icon: Laptop, t: "Basic Computer", d: "MS Office, internet & digital literacy, typing fluency.",
-    duration: "1–2 Months",
+    icon: Laptop, t: "Foundational", d: "MS Office, internet & digital literacy, typing fluency.",
+    duration: "2 Months – 1 Year",
     outcomes: ["Confident daily computer use", "MS Word, Excel, PowerPoint", "Email & internet literacy"],
     careers: ["Office Assistant", "Data Entry Operator", "Admin Support"],
-    courses: ["Basic Computer Course", "Awareness in Computer Concepts", "Course on Computer Concepts", "Advance Course on Computer Concepts", "Expert Computer Course", "Advance Computer Concepts and Programming"],
+    courses: [
+      { name: "Basic Computer Course", duration: "2 Months" },
+      { name: "Awareness in Computer Concepts", duration: "3 Months" },
+      { name: "Course on Computer Concepts", duration: "4 Months" },
+      { name: "Advance Course on Computer Concepts", duration: "5 Months" },
+      { name: "Expert Computer Course", duration: "6 Months" },
+      { name: "Advance Computer Concepts and Programming", duration: "1 Year" },
+    ],
   },
   {
-    icon: Code2, t: "Programming", d: "C, C++, Python, Java — the logic behind every application.",
-    duration: "2–4 Months",
+    icon: Code2, t: "Coding & Programming", d: "C, C++, Python, Java — the logic behind every application.",
+    duration: "2 Months – 1 Year",
     outcomes: ["Strong programming fundamentals", "Problem-solving with code", "Portfolio of small projects"],
     careers: ["Junior Developer", "QA Engineer", "Trainee Programmer"],
-    courses: ["Coding Foundation", "C Language Programming Course", "C++ Language Programming Course", "Programming with Python", "Data Structure and Algorithm", "Course in Software Development", "Java Programming (Basic to Advanced)"],
+    courses: [
+      { name: "Coding Foundation (C, C++, Python basics)", duration: "3 Months" },
+      { name: "C Language Programming", duration: "2 Months" },
+      { name: "C++ Language Programming", duration: "2 Months" },
+      { name: "Programming with Python", duration: "3 Months" },
+      { name: "Java Programming (Basic to Advanced)", duration: "3 Months" },
+      { name: "Data Structure and Algorithm", duration: "3 Months" },
+      { name: "Course in Software Development", duration: "1 Year" },
+    ],
   },
   {
     icon: Globe, t: "Web Development", d: "HTML, CSS, JavaScript, PHP & MySQL — build and ship real websites.",
-    duration: "3–5 Months",
+    duration: "2 Months – 1 Year",
     outcomes: ["Responsive site development", "Frontend + backend basics", "A live portfolio site"],
     careers: ["Web Developer", "Frontend Developer", "Freelance Web Builder"],
-    courses: ["Web Development Starter", "Course in Web Technology", "PHP and MySQL Web Development", "Responsive Website Basics", "HTML5, CSS3 & JavaScript Essentials"],
+    courses: [
+      { name: "Web Development Starter", duration: "2 Months" },
+      { name: "PHP and MySQL Web Development", duration: "3 Months" },
+      { name: "Course in Web Technology", duration: "1 Year" },
+      { name: "Professional Programming & Web Development", duration: "1 Year" },
+    ],
+  },
+  {
+    icon: BrainCircuit, t: "AI / ML", d: "AI concepts, prompt engineering, and applied machine learning.",
+    duration: "2 Months – 1 Year",
+    outcomes: ["Core AI/ML concepts", "Hands-on AI tools & prompt engineering", "Applied mini-projects"],
+    careers: ["AI Associate", "Automation Analyst", "AI Tools Specialist", "ML Engineer"],
+    courses: [
+      { name: "Prompt Engineering", duration: "2 Months" },
+      { name: "Computational Thinking and Artificial Intelligence", duration: "2 Months" },
+      { name: "Artificial Intelligence Fundamentals", duration: "3 Months" },
+      { name: "Machine Learning Basic", duration: "6 Months" },
+      { name: "AI Application Development", duration: "6 Months" },
+      { name: "Machine Learning Advanced", duration: "9 Months" },
+      { name: "AI Engineering & Deep Learning", duration: "1 Year" },
+    ],
   },
   {
     icon: Calculator, t: "Accounting", d: "Tally, GST, and practical bookkeeping for real businesses.",
-    duration: "2–3 Months",
+    duration: "3 Months – 1 Year",
     outcomes: ["Tally Prime proficiency", "GST-ready invoicing", "Ledger & balance sheets"],
     careers: ["Accounts Assistant", "Billing Executive", "Bookkeeper"],
-    courses: ["Professional Financial Accounting", "Tally Prime Course", "Certificate Course in Computer Basics and Accounting", "Course in Digital Accounting", "Office Automation, Accounting and Publishing Assistant", "Certificate Data Entry and Office Assistant"],
+    courses: [
+      { name: "Professional Financial Accounting", duration: "3 Months" },
+      { name: "Tally Prime Course", duration: "3 Months" },
+      { name: "Certificate Course in Computer Basics and Accounting", duration: "6 Months" },
+      { name: "Certificate Data Entry and Office Assistant", duration: "6 Months" },
+      { name: "Course in Digital Accounting", duration: "1 Year" },
+      { name: "Office Automation, Accounting and Publishing Assistant", duration: "1 Year" },
+    ],
   },
   {
-    icon: BrainCircuit, t: "Artificial Intelligence & Data", d: "AI concepts, prompt engineering, machine learning and data analysis.",
-    duration: "3–4 Months",
-    outcomes: ["Core AI/ML concepts", "Hands-on AI tools & prompt engineering", "Applied mini-projects"],
-    careers: ["AI Associate", "Data Analyst", "Automation Analyst", "AI Tools Specialist"],
-    courses: ["Computational Thinking and Artificial Intelligence", "Prompt Engineering", "Machine Learning with Python", "Data Analyst", "Artificial Intelligence Fundamentals", "AI Application Development", "AI Engineering & Deep Learning"],
+    icon: Megaphone, t: "Digital Marketing", d: "SEO, social media, and campaign fundamentals for real businesses.",
+    duration: "3 – 6 Months",
+    outcomes: ["Core digital marketing channels", "Campaign planning basics", "Practical hands-on tools"],
+    careers: ["Digital Marketing Executive", "Social Media Associate"],
+    courses: [
+      { name: "Basic Digital Marketing", duration: "3 Months" },
+      { name: "Advanced Digital Marketing", duration: "6 Months" },
+    ],
   },
-  { icon: Award, t: "Professional Diploma", d: "A structured, multi-skill diploma track for job-readiness.", duration: "6–12 Months", outcomes: ["Multi-domain competency", "Capstone project", "Placement-track eligible"], careers: ["Entry-level IT Roles", "Multi-skilled Executive"], courses: [] },
-  { icon: Sparkles, t: "Emerging Technologies", d: "SQL, Cloud, Power BI, Git, DevOps, Cyber Security & more.", duration: "Varies", outcomes: ["Market-relevant tooling", "Cloud & DevOps basics", "Cyber hygiene practices"], careers: ["Cloud Support Associate", "DevOps Trainee", "Security Analyst"], courses: [] },
+  {
+    icon: BarChart3, t: "Data Analytics", d: "Turning raw data into decisions with real analytical tools.",
+    duration: "3 – 6 Months",
+    outcomes: ["Data cleaning & analysis", "Dashboards & reporting", "Data-driven decision making"],
+    careers: ["Data Analyst", "Reporting Executive", "BI Associate"],
+    courses: [
+      { name: "Basic Data Analysis", duration: "3 Months" },
+      { name: "Advanced Data Analysis", duration: "6 Months" },
+    ],
+  },
+  {
+    icon: Sparkles, t: "Emerging Technologies", d: "SQL, Cloud, DevOps, Product Management & Graphic Design.",
+    duration: "2 – 3 Months",
+    outcomes: ["Market-relevant tooling", "Cloud & DevOps basics", "Hands-on, practical modules"],
+    careers: ["Cloud Support Associate", "DevOps Trainee", "Junior Product Analyst"],
+    courses: [
+      { name: "SQL", duration: "2 Months" },
+      { name: "Cloud Fundamentals", duration: "2 Months" },
+      { name: "Product Management", duration: "3 Months" },
+      { name: "DevOps Fundamentals", duration: "2 Months" },
+      { name: "Graphic Designing", duration: "2 Months" },
+    ],
+  },
 ];
 
 function ProgramsOverview({ setPage, goToEnquiry }) {
@@ -773,7 +839,7 @@ function ContactBlock({ dark = false, initialCourse = "" }) {
         <div className="grid sm:grid-cols-2 gap-4">
           {[
             { icon: Phone, t: "Call Us", lines: [["+91 90346 40741", "tel:+919034640741"], ["+91 94662 41741", "tel:+919466241741"]] },
-            { icon: Mail, t: "Email Us", lines: [["admissions@ahujanextgen.in", "mailto:admissions@ahujanextgen.in"], ["ahujanextgen@gmail.com", "mailto:ahujanextgen@gmail.com"]] },
+            { icon: Mail, t: "Email Us", lines: [["ahujanextgen@gmail.com", "mailto:ahujanextgen@gmail.com"]] },
             { icon: MapPin, t: "Visit Us", lines: [[address, mapsLink]], external: true },
             { icon: Clock, t: "Working Hours", lines: [["Mon–Sat, 9:00 AM – 7:00 PM", null]] },
           ].map((c) => (
@@ -869,7 +935,7 @@ function ContactBlock({ dark = false, initialCourse = "" }) {
                 {PROGRAM_CATS.map((p) => (
                   p.courses.length > 0 ? (
                     <optgroup key={p.t} label={p.t}>
-                      {p.courses.map((c) => <option key={c} value={c}>{c}</option>)}
+                      {p.courses.map((c) => <option key={c.name} value={c.name}>{c.name} ({c.duration})</option>)}
                     </optgroup>
                   ) : (
                     <option key={p.t} value={p.t}>{p.t}</option>
@@ -933,7 +999,6 @@ function Footer({ setPage }) {
           <div className="flex flex-col gap-2.5 text-[13.5px] text-white/55">
             <a href="tel:+919034640741" className="hover:text-white transition-colors">+91 90346 40741</a>
             <a href="tel:+919466241741" className="hover:text-white transition-colors">+91 94662 41741</a>
-            <a href="mailto:admissions@ahujanextgen.in" className="hover:text-white transition-colors">admissions@ahujanextgen.in</a>
             <a href="mailto:ahujanextgen@gmail.com" className="hover:text-white transition-colors">ahujanextgen@gmail.com</a>
             <a href="https://maps.google.com/?q=30.163771,76.866365" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Ekta Vihar, Near City Heart School, Shahabad Markanda, Distt. Kurukshetra</a>
           </div>
@@ -1112,8 +1177,9 @@ function ProgramsPage({ goToEnquiry }) {
                     <div className="text-[12px] font-semibold uppercase tracking-wide mb-3" style={{ color: ROYAL }}>Courses in this Track</div>
                     <div className="flex flex-wrap gap-2">
                       {PROGRAM_CATS[active].courses.map((c) => (
-                        <span key={c} className="text-[12.5px] font-medium px-3 py-1.5 rounded-full bg-white" style={{ color: INK, border: "1px solid rgba(10,45,111,0.12)" }}>
-                          {c}
+                        <span key={c.name} className="flex items-center gap-2 text-[12.5px] font-medium pl-3 pr-1 py-1 rounded-full bg-white" style={{ color: INK, border: "1px solid rgba(10,45,111,0.12)" }}>
+                          {c.name}
+                          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "rgba(233,162,59,0.15)", color: "#8a5a12" }}>{c.duration}</span>
                         </span>
                       ))}
                     </div>
@@ -1147,32 +1213,6 @@ function ProgramsPage({ goToEnquiry }) {
               </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      <section className="py-20 px-6 lg:px-10" style={{ background: PAPER }}>
-        <div className="max-w-6xl mx-auto">
-          <SectionHeading eyebrow="Emerging Technologies" title="Market-driven skills, updated continuously" sub="New programs are introduced regularly based on market demand and emerging technologies." />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { icon: Database, t: "SQL" },
-              { icon: Cloud, t: "Cloud Computing" },
-              { icon: BarChart3, t: "Power BI" },
-              { icon: GitBranch, t: "Git & GitHub" },
-              { icon: Briefcase, t: "Product Management" },
-              { icon: Code2, t: "DevOps" },
-              { icon: Lock, t: "Cyber Security" },
-              { icon: Megaphone, t: "Digital Marketing" },
-              { icon: Bot, t: "AI Tools & Automation" },
-            ].map((e, i) => (
-              <Reveal key={e.t} delay={i * 50}>
-                <div className="rounded-xl bg-white p-5 flex items-center gap-3" style={{ boxShadow: "0 2px 12px -6px rgba(10,45,111,0.08)" }}>
-                  <e.icon size={19} color={ROYAL} />
-                  <span className="text-[13.5px] font-medium" style={{ color: INK }}>{e.t}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
